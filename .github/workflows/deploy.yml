@@ -38,17 +38,12 @@ jobs:
       working-directory: champion-compass
       run: npm run build
 
-    # Step 7: Link the site to Netlify using the Site ID
+    # Step 7: Link the site to Netlify using the Site ID from GitHub Secrets
     - name: Link site to Netlify
       working-directory: champion-compass
-      run: netlify link --id ${{ secrets.dc9b9f41-8ce8-49bd-bfa5-1ccf172c756c }}
+      run: netlify link --id "${{ secrets.NETLIFY_SITE_ID }}"
 
     # Step 8: Deploy to Netlify
     - name: Deploy to Netlify
       working-directory: champion-compass
-      run: netlify deploy --prod --auth ${{ secrets.nfp_wdngw5B9FC3shreSTX6hhmo3fcYTyQt7bec1 }} --site ${{ secrets.dc9b9f41-8ce8-49bd-bfa5-1ccf172c756c }}
-
-
-
-   
-   
+      run: netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
