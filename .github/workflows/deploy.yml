@@ -1,6 +1,6 @@
 name: Deploy to Netlify
 
-# Trigger 
+# Trigger the workflow on push to the main branch
 on:
   push:
     branches:
@@ -11,24 +11,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1:
+    # Step 1: Checkout the code from the repository
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Install Node.js 
+    # Step 2: Install Node.js (this step installs Node.js 16)
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16'
 
-    # Step 3: Install project dependencies
+    # Step 3: Navigate to the frontend directory (champion-compass)
+    - name: Change directory to champion-compass
+      run: cd champion-compass
+
+    # Step 4: Install project dependencies (inside champion-compass)
     - name: Install dependencies
+      working-directory: champion-compass
       run: npm install
 
-    # Step 4: Build your site 
+    # Step 5: Build your site (this will run 'npm run build' in the correct directory)
     - name: Build the project
+      working-directory: champion-compass
       run: npm run build
 
-    # Step 5: Deploy to Netlify
+    # Step 6: Deploy to Netlify
     - name: Deploy to Netlify
-      run: npx netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
+      working-directory: champion-compass
+      run: npx netlify deploy --prod --auth ${{ secrets.nfp_wdngw5B9FC3shreSTX6hhmo3fcYTyQt7bec1 }} --site ${{ secrets.dc9b9f41-8ce8-49bd-bfa5-1ccf172c756c }}
