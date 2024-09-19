@@ -38,7 +38,7 @@ jobs:
       working-directory: champion-compass
       run: npm run build
 
-    # Step 7: Deploy to Netlify
+    # Step 7: Deploy to Netlify with the publish directory specified as 'build'
     - name: Deploy to Netlify
       working-directory: champion-compass
-      run: netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
+      run: netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }} --dir build
